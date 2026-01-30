@@ -62,3 +62,24 @@ todoForm.addEventListener("submit", (e) => {
 
 // Initial render
 render();
+
+// -------------------- Toggle Done & Delete Todo --------------------
+list.addEventListener("click", (e) => {
+  const li = e.target.closest(".todo");
+  if (!li) return;
+
+  const index = Array.from(list.children).indexOf(li);
+
+  // Delete
+  if (e.target.classList.contains("delete-btn")) {
+    todos.splice(index, 1);
+    render();
+    return;
+  }
+
+  // Toggle done (checkbox click)
+  if (e.target.type === "checkbox") {
+    todos[index].done = e.target.checked;
+    render();
+  }
+});
